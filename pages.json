@@ -1,0 +1,50 @@
+{
+  "pages": [
+    {
+      "path": "pages/case/index",
+      "style": {
+        "navigationBarTitleText": "案例方案",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/user/index",
+      "style": {
+        "navigationBarTitleText": "用户中心",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/setList/permissions",
+      "style": {
+        "navigationBarTitleText": "授权开关"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "海鼎活动",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#C0C4CC",
+    "selectedColor": "#1cbbb4",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/case/index",
+        "iconPath": "static/img/tabbar/tab-cate.png",
+        "selectedIconPath": "static/img/tabbar/tab-cate-cyan.png",
+        "text": "案例"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "static/img/tabbar/tab-my.png",
+        "selectedIconPath": "static/img/tabbar/tab-my-cyan.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

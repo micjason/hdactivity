@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     eventClick() {
-      if (this.listInfo.url !== "") {
+      if (this.listInfo.type !== "btn") {
         this.$emit("eventClick", this.listInfo.url);
       } else {
         this.callback();

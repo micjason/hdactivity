@@ -19,13 +19,13 @@
       <!--vip信息-->
       <view class="vip-card-box">
         <view class="b-btn">
-          {{ "系统管理员" }}
+          {{ "尊贵会员" }}
         </view>
         <view class="tit">
           <i class="iconfont iconzuanshi" />
           {{ "海鼎" }}
         </view>
-        <text class="e-m">我还在测试</text>
+        <text class="e-m">欢迎使用海鼎品牌中心小程序</text>
       </view>
     </view>
     <!-- 个人中心 内容区-->
@@ -52,6 +52,7 @@
             :key="index"
             hover-class="common-hover"
             :hover-stay-time="50"
+            @click="jumpUrl(item.url)"
           >
             <i
               class="iconfont"
@@ -66,7 +67,7 @@
         <view v-for="(item, index) in setList" :key="index"
           ><list-cell
             :listInfo="item"
-			:callback="getSetting"
+            :callback="getSetting"
             @eventClick="jumpUrl(item.url)"
           ></list-cell
         ></view>
@@ -152,7 +153,7 @@ export default {
       moving: false,
       syslist: {
         title: "管理员功能",
-        borderStyle:'b-b',
+        borderStyle: "b-b",
       },
     };
   },
@@ -248,19 +249,21 @@ export default {
       this.coverTransform = "translateY(0px)";
     },
     jumpUrl(url) {
-      console.log("url", url);
-      if (!url) return;
-      uni.navigateTo({
-        url,
-        complete: function (com) {
-          console.log("com", com);
-        },
-      });
+      // if (!url) return;
+      // uni.navigateTo({
+      //   url,
+      //   complete: function (com) {
+      //     console.log("com", com);
+      //   },
+      // });
+      uni.showToast({
+        title:"功能还在开发中",
+        icon: "none",
+      })
     },
     getUserInfo() {
       const that = this;
-      const user_info = that.userInfo;
-      if (Object.keys(user_info).length !== 0) return;
+      if (Object.keys(that.userInfo).length !== 0) return;
 
       //判断是否存在getUserProfile方法
       if (uni.getUserProfile) {
@@ -278,7 +281,7 @@ export default {
       const that = this;
       uni.openSetting({
         success(res) {
-          if (res.authSetting['scope.userInfo'] === false) {
+          if (res.authSetting["scope.userInfo"] === false) {
             that.$store.commit("setUserInfo", {});
           }
         },

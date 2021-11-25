@@ -409,7 +409,6 @@ export default{
 					    	canvasId: this.canvas_id,
 					    	quality: 1,
 					    	success: (res)=>{
-					    		console.log('res',res)
 					    		resolve(res)
 					    		callback && callback(res)
 					    	},
@@ -462,7 +461,6 @@ export default{
 					this.setNativeBorderRadius(config)
 					this.ctx.fill()
 				}else{
-					console.log('config.border_width',config.border_width)
 					this.ctx.fillRect(this.compatibilitySize(config.x*this.scale),this.compatibilitySize(config.y*this.scale),this.compatibilitySize(parseFloat(config.w)*this.scale),this.compatibilitySize(parseFloat(config.h)*this.scale))
 				}
 				resolve()

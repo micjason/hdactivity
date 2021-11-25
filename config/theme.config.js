@@ -83,7 +83,7 @@ themeList.forEach((item) => {
   let tmp_arr = [];
   item.tabList = [];
   colorArr.forEach((item2) => {
-    let tmp_str = "/static/img/tabbar/tab-" + item2 + "-" + item.name + ".png";
+    let tmp_str = "/static/assets/tabbar/tab-" + item2 + "-" + item.name + ".png";
     tmp_arr.push(tmp_str);
   });
   item.tabList = tmp_arr;

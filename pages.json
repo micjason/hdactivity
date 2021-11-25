@@ -3,8 +3,7 @@
     {
       "path": "pages/case/index",
       "style": {
-        "navigationBarTitleText": "案例方案",
-        "enablePullDownRefresh": true
+        "navigationBarTitleText": "案例方案"
       }
     },
     {
@@ -15,9 +14,9 @@
       }
     },
     {
-      "path": "pages/setList/permissions",
+      "path": "pages/case/detail",
       "style": {
-        "navigationBarTitleText": "授权开关"
+        "navigationBarTitleText": "案例详情"
       }
     }
   ],
@@ -35,14 +34,14 @@
     "list": [
       {
         "pagePath": "pages/case/index",
-        "iconPath": "static/img/tabbar/tab-cate.png",
-        "selectedIconPath": "static/img/tabbar/tab-cate-cyan.png",
+        "iconPath": "static/assets/tabbar/tab-cate.png",
+        "selectedIconPath": "static/assets/tabbar/tab-cate-cyan.png",
         "text": "案例"
       },
       {
         "pagePath": "pages/user/index",
-        "iconPath": "static/img/tabbar/tab-my.png",
-        "selectedIconPath": "static/img/tabbar/tab-my-cyan.png",
+        "iconPath": "static/assets/tabbar/tab-my.png",
+        "selectedIconPath": "static/assets/tabbar/tab-my-cyan.png",
         "text": "我的"
       }
     ]

@@ -1,17 +1,21 @@
 <template>
   <view class="item">
-    <view class="item-wrapper">
+    <view class="item-wrapper" @click="jumpDetail(itemInfo.id)">
       <view class="item-left">
         <view class="item-title-box"
           ><text class="item-title">{{ itemInfo.title }}</text></view
         >
-        <view class="item-box">
-          <text class="item-author">{{ itemInfo.author }}</text>
-          <text class="item-time">{{ itemInfo.time }}</text>
+        <view class="item-tips-wrapper">
+          <view
+            class="item-tips-box"
+            v-for="(item, index) in itemInfo.disc"
+            :key="index"
+            >{{ item }}</view
+          >
         </view>
       </view>
       <view class="item-right"
-        ><image mode="widthFix" :src="itemInfo.img"></image
+        ><img :src="itemInfo.img"></img
       ></view>
     </view>
   </view>
@@ -24,10 +28,10 @@ export default {
       default: function () {
         return {
           id: 1,
-          title: "别再玩手机了，赶紧学前端，晚一年能少掉5根头发",
-          author: "神秘前端",
-          time: "2小时前",
-          img: "http://fc-feed.cdn.bcebos.com/0/pic/9107b498a0cbea000842763091e833b6.jpg",
+          title: "标题",
+          disc: "副标题",
+          img: "",
+          pdf: "",
         };
       },
     },
@@ -35,7 +39,14 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    jumpDetail(id) {
+      if (!id) return;
+      uni.navigateTo({
+        url: `/pages/case/detail?id=${id}`,
+      });
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -51,10 +62,10 @@ export default {
       flex: 1;
       padding-right: 16rpx;
       .item-title-box {
-        height: 92rpx;
+        height: 90rpx;
         .item-title {
-          font-size: 32rpx;
-          line-height: 46rpx;
+          font-size: 30rpx;
+          line-height: 45rpx;
           color: #303133;
           display: -webkit-box;
           overflow: hidden;
@@ -66,24 +77,34 @@ export default {
         }
       }
 
-      .item-box {
-        margin-top: 20rpx;
-        font-size: 26rpx;
-        color: #aaa;
-        .item-author {
-        }
-        .item-time {
-          margin-left: 20rpx;
+      .item-tips-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10rpx;
+        .item-tips-box {
+          font-size: 24rpx;
+          line-height: 40rpx;
+          height: 40rpx;
+          color: #1cbbb4;
+          padding: 0 12rpx;
+          border-radius: 8rpx;
+          background: #e3f7e6;
+          margin-bottom: 5rpx;
+          margin-right: 10rpx;
         }
       }
     }
     .item-right {
-      flex-basis: 252rpx;
-      height: 140rpx;
+      flex-basis: 266rpx;
+      height: 180rpx;
       flex-shrink: 0;
       background: #fff;
       border-radius: 10rpx;
       overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

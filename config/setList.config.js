@@ -6,24 +6,28 @@ export default {
       url: "",
       tips: "我是授权开关呦",
       borderStyle:'b-b',
+      type:'btn'
     },
     {
       icon:'t-icon-shoucang',
       title: "我的收藏列表",
-      url: "/pages/setList/permissions",
+      url: "",
       tips: "",
       borderStyle:'b-b',
+      type:'link'
     },{
       icon:'t-icon-xiaoxi',
       title: "通知消息",
-      url: "/pages/setList/permissions",
+      url: "",
       tips: "",
       borderStyle:'b-b',
+      type:'link'
     },{
       icon:'t-icon-jiance',
       title: "我参加的会议",
-      url: "/pages/setList/permissions",
+      url: "",
       tips: "",
+      type:'link'
     },
   ],
 };

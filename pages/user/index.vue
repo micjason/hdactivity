@@ -43,7 +43,7 @@
     >
       <image class="arc" :src="arc"></image>
       <!--个人中心-->
-      <view class="promotion-center">
+      <!-- <view class="promotion-center">
         <list-cell :listInfo="syslist"></list-cell>
         <view class="management-section">
           <view
@@ -61,17 +61,15 @@
             <text>{{ item.title }}</text>
           </view>
         </view>
-      </view>
+      </view> -->
       <!-- 个人资料 -->
       <view class="set-list">
         <view v-for="(item, index) in setList" :key="index"
-          ><list-cell
-            :listInfo="item"
-            :callback="getSetting"
-            @eventClick="jumpUrl(item.url)"
-          ></list-cell
+          ><list-cell :listInfo="item" @eventClick="callback(item)"></list-cell
         ></view>
       </view>
+
+      <official-account></official-account>
 
       <view class="cu-list menu sm-border card-menu">
         <view class="cu-item">
@@ -145,6 +143,7 @@ export default {
       themeList: this.$themeConfig.themeList,
       setList: this.$setListConfig.setList,
       headImg: this.$assetsConfig.headImg,
+      logoImg: this.$assetsConfig.logoImg,
       userBg: this.$assetsConfig.userBg,
       vipCardBg: this.$assetsConfig.vipCardBg,
       arc: this.$assetsConfig.arc,
@@ -248,19 +247,6 @@ export default {
       this.coverTransition = "transform 0.3s cubic-bezier(.21,1.93,.53,.64)";
       this.coverTransform = "translateY(0px)";
     },
-    jumpUrl(url) {
-      // if (!url) return;
-      // uni.navigateTo({
-      //   url,
-      //   complete: function (com) {
-      //     console.log("com", com);
-      //   },
-      // });
-      uni.showToast({
-        title:"功能还在开发中",
-        icon: "none",
-      })
-    },
     getUserInfo() {
       const that = this;
       if (Object.keys(that.userInfo).length !== 0) return;
@@ -277,6 +263,26 @@ export default {
         console.log("功能暂未开放");
       }
     },
+    callback(item) {
+      if (item.title == "通知消息") {
+        uni.showToast({
+          title: "暂未收到通知消息",
+          icon: "none",
+        });
+      } else if (item.title == "授权开关") {
+        this.getSetting();
+      } else if (item.title == "我参加的会议") {
+        uni.navigateTo({
+          url: item.url,
+        });
+      }
+    },
+    jumpUrl(url) {
+      uni.showToast({
+        title: "暂未收到通知消息",
+        icon: "none",
+      });
+    },
     getSetting() {
       const that = this;
       uni.openSetting({
@@ -288,6 +294,26 @@ export default {
       });
     },
   },
+  onShareAppMessage(res) {
+    if (res.from === "button") {
+      // 来自页面内分享按钮
+      console.log("来自页面内分享按钮", res.target);
+    }
+    return {
+      title: "海鼎品牌中心小程序",
+      path: "/pages/case/index",
+      imageUrl: this.logoImg,
+      content: "我是自定义分享描述，请确定文案",
+      success: function (res) {
+        uni.showToast({
+          title: "分享成功",
+          icon: "success",
+          duration: 2000,
+          success: (res) => {},
+        });
+      },
+    };
+  },
 };
 </script>
 <style lang="scss">
@@ -296,37 +322,11 @@ page {
 }
 
 .user {
-  .promotion-center {
-    background: #fff;
-    margin-bottom: 20upx;
-  }
-
-  .management-section {
-    @extend %section;
-    padding: 28upx 0;
-
-    .management-item {
-      @extend %flex-center;
-      width: 120upx;
-      height: 120upx;
-      border-radius: 10upx;
-      font-size: $font-sm;
-      color: $font-color-dark;
-      position: relative;
-    }
-
-    .iconfont {
-      font-size: 48upx;
-    }
-  }
-
-  .cu-list.card-menu {
-    margin: $spacing-base 0;
-
-    .title {
-      margin-left: $spacing-base;
-    }
-  }
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   .user-section {
     height: 520upx;
@@ -374,7 +374,7 @@ page {
       flex-direction: column;
       color: #f7d680;
       height: 240upx;
-      background: url("/static/assets/vip-card.png");
+      background: url("/static/assets/img/vip-card.png");
       background-size: 100% 100%;
       border-radius: 16upx 16upx 0 0;
       overflow: hidden;
@@ -411,6 +411,7 @@ page {
   }
 
   .cover-container {
+    flex: 1;
     margin-top: -150upx;
     padding: 0 30upx 20upx;
     position: relative;
@@ -427,6 +428,37 @@ page {
     .promotion-center {
       background: #fff;
       margin-bottom: 20upx;
+    }
+  }
+  .promotion-center {
+    background: #fff;
+    margin-bottom: 20upx;
+  }
+
+  .management-section {
+    @extend %section;
+    padding: 28upx 0;
+
+    .management-item {
+      @extend %flex-center;
+      width: 120upx;
+      height: 120upx;
+      border-radius: 10upx;
+      font-size: $font-sm;
+      color: $font-color-dark;
+      position: relative;
+    }
+
+    .iconfont {
+      font-size: 48upx;
+    }
+  }
+
+  .cu-list.card-menu {
+    margin: $spacing-base 0;
+
+    .title {
+      margin-left: $spacing-base;
     }
   }
 }

@@ -7,7 +7,7 @@
       alt=""
       @load="imgOver"
     ></image>
-    <share :itemInfo="itemInfo"></share>
+    <share v-if="overLoad" :itemInfo="itemInfo"></share>
   </div>
 </template>
 <script>
@@ -25,7 +25,6 @@ export default {
     share,
   },
   onLoad: function (option) {
-    console.log("detail", option);
     this.itemInfo = this.pdfList[option.id * 1 - 1];
     uni.showLoading({
       title: "加载中",
@@ -33,33 +32,29 @@ export default {
   },
   methods: {
     imgOver(e) {
-      console.log("图片加载完毕", e);
       uni.hideLoading();
       this.overLoad = true;
-    },
-    // readPdf() {
-    //   console.log(123123123);
-    //   uni.downloadFile({
-    //     url: "http://r30p83yzt.hn-bkt.clouddn.com/%E3%80%90%E6%B5%B7%E9%BC%8E%E7%94%9F%E9%B2%9C%E7%89%A9%E6%B5%81%E5%AE%A2%E6%88%B7%E6%A1%88%E4%BE%8B%E3%80%91.pdf",
-    //     success: function (res) {
-    //       console.log("down", res);
-    //       var filePath = res.tempFilePath;
-    //       uni.openDocument({
-    //         filePath: filePath,
-    //         showMenu: true,
-    //         success: function (res) {
-    //           console.log("打开文档成功");
-    //         },
-    //         complete: function (done) {
-    //           console.log("done", done);
-    //         },
-    //       });
-    //     },
-    //     complete: function (done) {
-    //       console.log("done", done);
-    //     },
-    //   });
-    // },
+    }
+  },
+  onShareAppMessage(res) {
+    if (res.from === "button") {
+      // 来自页面内分享按钮
+      console.log("来自页面内分享按钮", res.target);
+    }
+    return {
+      title: this.itemInfo.title,
+      path: `/pages/case/detail?id=${this.itemInfo.id}`,
+      imageUrl: this.itemInfo.img,
+      content: "我是自定义分享描述，请确定文案",
+      success: function (res) {
+        uni.showToast({
+          title: "分享成功",
+          icon: "success",
+          duration: 2000,
+          success: (res) => {},
+        });
+      },
+    };
   },
 };
 </script>

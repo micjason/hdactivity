@@ -61,11 +61,12 @@ export default {
     .item-left {
       flex: 1;
       padding-right: 16rpx;
+      overflow: hidden;
       .item-title-box {
         height: 90rpx;
         .item-title {
           font-size: 30rpx;
-          line-height: 45rpx;
+          line-height: 42rpx;
           color: #303133;
           display: -webkit-box;
           overflow: hidden;
@@ -82,15 +83,19 @@ export default {
         flex-wrap: wrap;
         margin-top: 10rpx;
         .item-tips-box {
-          font-size: 24rpx;
-          line-height: 40rpx;
-          height: 40rpx;
-          color: #1cbbb4;
+          font-size: 22rpx;
+          line-height: 36rpx;
+          height: 36rpx;
+          color:rgb(1,160,182);
           padding: 0 12rpx;
           border-radius: 8rpx;
-          background: #e3f7e6;
+          background:rgba(1,160,182,.08);
           margin-bottom: 5rpx;
           margin-right: 10rpx;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }

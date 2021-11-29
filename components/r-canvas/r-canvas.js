@@ -368,7 +368,13 @@ export default{
 		setCanvasConfig(config){
 			this.ctx.globalAlpha = config.global_alpha
 			this.ctx.fillStyle = config.backgroundColor
-			this.ctx.fillRect(0, 0, parseFloat(this.canvas_width)*this.scale, parseFloat(this.canvas_height)*this.scale)
+			// this.ctx.fillRect(0, 0, parseFloat(this.canvas_width)*this.scale, parseFloat(this.canvas_height)*this.scale)
+			this.drawRoundRectPath({
+				w: parseFloat(this.canvas_width)*this.scale, 
+				h: parseFloat(this.canvas_height)*this.scale, 
+				radius: 10
+			});
+			this.ctx.fill();
 		},
 		/**
 		 * set canvas width

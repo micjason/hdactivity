@@ -14,7 +14,7 @@
 </script>
 <style>
 .r-canvas{
-	transform-origin: 0 0;
+	transform-origin: 0 0
 }
 .r-canvas-component{
 	overflow: hidden;

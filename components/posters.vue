@@ -28,10 +28,8 @@ export default {
     return {
       img_dismiss: require("@/static/assets/img/dismiss.png"),
       userBg: this.$assetsConfig.userBg,
-      userNickName: this.$assetsConfig.userNickName,
       postBg: this.$assetsConfig.postBg,
       miniCode: this.$assetsConfig.miniCode,
-      postLongpess: this.$assetsConfig.postLongpess,
       showBottom: false,
       tempFilePath: "",
       loading: false,
@@ -51,7 +49,6 @@ export default {
   },
   onReady() {
     this.showModel();
-    console.log(1111,this.$store.state.userInfo);
   },
   methods: {
     showModel() {
@@ -81,7 +78,8 @@ export default {
             x: 0,
             y: 0,
             w: 320,
-            h: 330,
+            h: 340,
+            border_radius: 10,
           })
           .catch((err_msg) => {
             uni.showToast({
@@ -96,7 +94,7 @@ export default {
             text: that.canvasInfo.title,
             max_width: 0,
             x: 30,
-            y: 100,
+            y: 90,
             font_color: "rgb(255, 255, 255)",
             font_size: 20,
             max_width: 220,
@@ -111,19 +109,61 @@ export default {
             });
           });
 
+        let disc_height = 120;
+        if (that.canvasInfo.title.length > 10) {
+          disc_height = 140;
+        }
+
         // 画disc
         await that.$refs.rCanvas
           .drawText({
             text: that.canvasInfo.disc[0],
             max_width: 0,
             x: 30,
-            y: 150,
-            font_color: "rgb(175, 174, 175)",
+            y: disc_height,
+            font_color: "rgb(217, 217, 217)",
             font_size: 14,
             max_width: 200,
             line_clamp: 2,
             line_clamp_hint: "...",
             line_height: 20,
+          })
+          .catch((err_msg) => {
+            uni.showToast({
+              title: err_msg,
+              icon: "none",
+            });
+          });
+
+        let line_height = disc_height + 16;
+        if (that.canvasInfo.disc[0].length > 14) {
+          line_height = disc_height + 36;
+        }
+
+        // 画一个横线
+        await that.$refs.rCanvas
+          .drawRect({
+            x: 30,
+            y: line_height,
+            w: 24,
+            h: 2,
+            color: "#fff",
+          })
+          .catch((err_msg) => {
+            uni.showToast({
+              title: err_msg,
+              icon: "none",
+            });
+          });
+
+        // 画盖住图片圆角的矩形
+        await that.$refs.rCanvas
+          .drawRect({
+            x: 0,
+            y: 328,
+            w: 320,
+            h: 14,
+            color: "#fff",
           })
           .catch((err_msg) => {
             uni.showToast({
@@ -152,7 +192,7 @@ export default {
         // 画用户昵称
         await that.$refs.rCanvas
           .drawText({
-            text: that.$store.state.userInfo.nickName || that.userNickName,
+            text: that.$store.state.userInfo.nickName || '微信用户',
             x: 65,
             y: 370,
             font_color: "rgb(175, 174, 175)",
@@ -172,7 +212,7 @@ export default {
         // 画使用介绍
         await that.$refs.rCanvas
           .drawText({
-            text: that.postLongpess,
+            text: '长按识别小程序码，获取更多案例资讯',
             x: 15,
             y: 410,
             font_color: "#ccc",
@@ -218,7 +258,6 @@ export default {
       utils.throttle(this.handleHideModel(), 3000);
     },
     handleHideModel() {
-      console.log("handleHideModel", 111111);
       // this.$refs.rCanvas.clearCanvas();
       this.$emit("hidePoster");
     },
@@ -283,7 +322,6 @@ export default {
             that.$refs.rCanvas
               .saveImage(that.tempFilePath)
               .then((result) => {
-                console.log("result", result);
                 if ((result.errMsg = "saveImageToPhotosAlbum:ok")) {
                   uni.showToast({
                     title: "保存成功",
@@ -295,7 +333,6 @@ export default {
                 }
               })
               .catch((err) => {
-                console.log("err", err);
                 uni.showToast({
                   title: "保存失败",
                   duration: 1500,
@@ -350,8 +387,8 @@ export default {
       width: 640upx;
       height: 860rpx;
       max-width: 100%;
-      border-radius: 20rpx;
-      overflow: hidden;
+      // border-radius: 20rpx;
+      // overflow: hidden
     }
 
     .poster-longpress {

@@ -128,27 +128,7 @@ export default {
     //   this.showPermission = false;
     // },
   },
-  onShareAppMessage(res) {
-    if (res.from === "button") {
-      // 来自页面内分享按钮
-      console.log("来自页面内分享按钮", res.target);
-    }
-    return {
-      title: this.itemInfo.title,
-      path: `/pages/case/detail?id=${this.itemInfo.id}`,
-      imageUrl: this.itemInfo.img,
-      content: "我是自定义分享描述，请确定文案",
-      success: function (res) {
-        console.log("res", res);
-        uni.showToast({
-          title: "分享成功",
-          icon: "success",
-          duration: 2000,
-          success: (res) => {},
-        });
-      },
-    };
-  },
+  
 };
 </script>
 <style lang="scss" scoped>

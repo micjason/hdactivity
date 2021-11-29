@@ -18,6 +18,18 @@
       "style": {
         "navigationBarTitleText": "案例详情"
       }
+    },
+    {
+      "path": "pages/user/metting/index",
+      "style": {
+        "navigationBarTitleText": "参加的会议"
+      }
+    },
+    {
+      "path": "pages/user/news/index",
+      "style": {
+        "navigationBarTitleText": "收到的消息"
+      }
     }
   ],
   "globalStyle": {

@@ -31,18 +31,11 @@ export default {
           borderStyle: "",
         };
       },
-    },
-    callback: {
-      type: Function,
-    },
+    }
   },
   methods: {
     eventClick() {
-      if (this.listInfo.type !== "btn") {
-        this.$emit("eventClick", this.listInfo.url);
-      } else {
-        this.callback();
-      }
+     this.$emit("eventClick");
     },
   },
 };
